@@ -251,7 +251,7 @@
             lbl_name.Name = "lbl_name";
             lbl_name.Size = new Size(782, 75);
             lbl_name.TabIndex = 0;
-            lbl_name.Text = "Burak Enes Portakal'ın Bilgileri";
+            lbl_name.Text = "Hatalı Kullanıcı Adı Girdiniz, Lütfen Çıkıp Tekrar Giriniz!";
             lbl_name.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panel4

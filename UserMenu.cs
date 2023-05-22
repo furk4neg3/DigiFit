@@ -12,21 +12,28 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-
+//Öğrencinin giriş yaptıktan sonra göreceği menü
 namespace DigiFit {
     public partial class UserMenu : Form {
+        //MS Access'e bağlanmak için OleDbConnection objesi oluşturulur
         private OleDbConnection connection = new OleDbConnection();
+        //Giriş yapan kullanıcının bilgilerine erişmek için userlogin objesi oluşturulur
         UserLogin usLo;
         public UserMenu(UserLogin uLo) {
             InitializeComponent();
+            //Görsel düzenlemeler yapılır
             txt_firstex.Hide();
             txt_secondex.Hide();
             txt_thirdex.Hide();
             txt_lastex.Hide();
+            //İlgili veritabanına bağlantı sağlanır
             connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Excalibur\Desktop\Databases\DigiFitDatabase.accdb;Persist Security Info=False;";
-            this.usLo = uLo;//I got the username by that way, I can use it wherever I want by just typing usLo.userName
+            //Oluşturulan obje parametre olarak alınan objeye eşitlenir
+            this.usLo = uLo;
             panel3.Hide();
+            //Veritabanına bağlantı sağlanır
             connection.Open();
+            //Giriş yapan kullanıcının kilo ve hedef bilgileri yazdırılır
             OleDbDataReader reader = null;
             OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE Username='" + usLo.userName + "'", connection);
             reader = command.ExecuteReader();
@@ -35,15 +42,18 @@ namespace DigiFit {
                 lbl_target.Text = "Hedef: " + reader[4].ToString();
                 lbl_kilo.Text = "Güncel Kilo: " + reader[5].ToString();
             }
-
+            //Bağlantı kapatılır
             connection.Close();
         }
 
+        //Çıkış butonu için kullanılacak kod
         private void btn_close_Click(object sender, EventArgs e) {
             Application.Exit();
         }
 
+        //Sırt egzersizlerini görüntülemek için kullanılacak kod
         private void btn_back_Click(object sender, EventArgs e) {
+            //Görsel düzenlemeler yapılır
             panel3.Height = btn_back.Height;
             panel3.Top = btn_back.Top;
             panel3.Show();
@@ -70,7 +80,7 @@ namespace DigiFit {
             OleDbDataReader reader = null;
             OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE Username='" + usLo.userName + "'", connection);
             reader = command.ExecuteReader();
-
+            //Öğrencinin bilgileri ilgili yerlere yazdırılır
             while (reader.Read()) {
                 lbl_firstex.Text = reader[60].ToString();
                 lbl_firstkilo.Text = reader[61].ToString();//9 10 12 13 15 16
@@ -85,12 +95,13 @@ namespace DigiFit {
                 txt_thirdex.Text = reader[68].ToString();
                 txt_lastex.Text = reader[71].ToString();
             }
-
+            //Textboxa bilgi girildikten sonra enter tuşuna basıldığında girilen bilginin kaydedilebilmesi için gerekli kodlar yazılır
             txt_firstex.KeyDown += new KeyEventHandler(tb_KeyDown);
             txt_secondex.KeyDown += new KeyEventHandler(tb_KeyDown);
             txt_thirdex.KeyDown += new KeyEventHandler(tb_KeyDown);
             txt_lastex.KeyDown += new KeyEventHandler(tb_KeyDown);
-
+            //Buradaki panel3.Top == btn_back.Top ibaresinin sebebi o anda kullanıcının hangi butonda olduğunu yani hangi bölgenin hareketlerini değiştirmek istediğini
+            //görmektir. Bu ibare olmazsa enter tuşuna basıldığında o ana kadar açılan tüm bölgelerdeki hareket değişir
             void tb_KeyDown(object sender, KeyEventArgs e) {
                 if (e.KeyCode == Keys.Enter && panel3.Top == btn_back.Top) {
                     connection.Open();
@@ -105,6 +116,8 @@ namespace DigiFit {
             connection.Close();
         }
 
+        //Bundan sonraki kodlar mantık olarak sırt antrenmanında kullanılan kodlarla aynıdır, açıklama gerekliyse oradaki açıklamalar okunması yeterli olacaktır
+        //Bacak antrenmanlarını görüntülemek için kullanılacak kod
         private void btn_bacak_Click(object sender, EventArgs e) {
             panel3.Height = btn_back.Height;
             panel3.Top = btn_bacak.Top;
@@ -165,6 +178,7 @@ namespace DigiFit {
             connection.Close();
         }
 
+        //Biceps antrenmanlarını görüntülemek için kullanılacak kod
         private void btn_biceps_Click(object sender, EventArgs e) {
             panel3.Height = btn_back.Height;
             panel3.Top = btn_biceps.Top;
@@ -226,6 +240,7 @@ namespace DigiFit {
             connection.Close();
         }
 
+        //Göğüs antrenmanlarını görüntülemek için kullanılacak kod
         private void btn_chest_Click(object sender, EventArgs e) {
             panel3.Height = btn_back.Height;
             panel3.Top = btn_chest.Top;
@@ -287,6 +302,7 @@ namespace DigiFit {
             connection.Close();
         }
 
+        //Kardiyo antrenmanlarını görüntülemek için kullanılacak kod
         private void btn_cardio_Click(object sender, EventArgs e) {
             panel3.Height = btn_back.Height;
             panel3.Top = btn_cardio.Top;
@@ -344,6 +360,7 @@ namespace DigiFit {
             connection.Close();
         }
 
+        //Omuz antrenmanlarını görüntülemek için kullanılacak kod
         private void btn_shoulder_Click(object sender, EventArgs e) {
             panel3.Height = btn_back.Height;
             panel3.Top = btn_shoulder.Top;
@@ -405,6 +422,7 @@ namespace DigiFit {
             connection.Close();
         }
 
+        //Triceps antrenmanlarını görüntülemek için kullanılacak kod
         private void btn_triceps_Click(object sender, EventArgs e) {
             panel3.Height = btn_back.Height;
             panel3.Top = btn_triceps.Top;
@@ -475,6 +493,7 @@ namespace DigiFit {
 
         }
 
+        //Kullanıcı bilgilerini görüntülemek ve değiştirmek için kullanılacak kod
         private void btn_home_Click(object sender, EventArgs e) {
             panel3.Hide();
             panel3.Top = 0;
@@ -531,6 +550,6 @@ namespace DigiFit {
             }
 
             connection.Close();
-        }//try catch eklenecek kilo kısımlarına sayı dışında değer girilirse diye
+        }
     }
 }
