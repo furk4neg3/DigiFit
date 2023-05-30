@@ -35,6 +35,8 @@
             panel2 = new Panel();
             label1 = new Label();
             panel3 = new Panel();
+            label3 = new Label();
+            label2 = new Label();
             lbl_close = new Label();
             lbl_name = new Label();
             panel4 = new Panel();
@@ -223,6 +225,8 @@
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(178, 8, 55);
+            panel3.Controls.Add(label3);
+            panel3.Controls.Add(label2);
             panel3.Controls.Add(lbl_close);
             panel3.Controls.Add(lbl_name);
             panel3.Dock = DockStyle.Top;
@@ -230,6 +234,29 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(850, 75);
             panel3.TabIndex = 1;
+            // 
+            // label3
+            // 
+            label3.Font = new Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = Color.WhiteSmoke;
+            label3.Location = new Point(601, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(165, 75);
+            label3.TabIndex = 2;
+            label3.Text = "Tekrar Giriniz";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            label2.Font = new Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.ForeColor = Color.WhiteSmoke;
+            label2.Location = new Point(387, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(180, 75);
+            label2.TabIndex = 1;
+            label2.Text = "Lütfen Çıkıp";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            label2.Click += label2_Click;
             // 
             // lbl_close
             // 
@@ -249,9 +276,9 @@
             lbl_name.ForeColor = Color.WhiteSmoke;
             lbl_name.Location = new Point(0, 0);
             lbl_name.Name = "lbl_name";
-            lbl_name.Size = new Size(782, 75);
+            lbl_name.Size = new Size(381, 75);
             lbl_name.TabIndex = 0;
-            lbl_name.Text = "Hatalı Kullanıcı Adı Girdiniz, Lütfen Çıkıp Tekrar Giriniz!";
+            lbl_name.Text = "Hatalı Kullanıcı Adı Girdiniz";
             lbl_name.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panel4
@@ -560,5 +587,7 @@
         private Label lbl_kilo3;
         private Label lbl_uskilo4;
         private Label lbl_kilo4;
+        private Label label2;
+        private Label label3;
     }
 }

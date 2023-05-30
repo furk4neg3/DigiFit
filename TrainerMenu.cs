@@ -39,13 +39,15 @@ namespace DigiFit {
             trLo = tLo;
             //Veritabanına bağlantı sağlanır
             connection.Open();
-            //Hangi öğrencinin bilgilerinin görüntülendiği yazdırılır.
+            //Hangi öğrencinin bilgilerinin görüntülendiği, kullanıcının güncel kilosu ve hedefi yazdırılır.
             OleDbDataReader reader = null;
             OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE Username='" + trLo.userNAme + "'", connection);
             reader = command.ExecuteReader();
 
             while (reader.Read()) {
                 lbl_name.Text = reader[1].ToString() + "'in Bilgileri";
+                label2.Text = "Kilo: " + reader[5].ToString();
+                label3.Text = "Hedef: " + reader[4].ToString();
             }
 
             //Bağlantı sonlandırılır
@@ -522,6 +524,10 @@ namespace DigiFit {
         }
 
         private void label1_Click(object sender, EventArgs e) {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e) {
 
         }
     }
