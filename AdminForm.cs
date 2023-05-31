@@ -156,5 +156,9 @@ namespace DigiFit {
                 txt_name.Text = row.Cells[3].Value.ToString();
             }
         }
+        
+        private void label5_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
     }
 }

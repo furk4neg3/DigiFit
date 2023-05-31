@@ -40,6 +40,7 @@
             btn_deletetrai = new Button();
             label4 = new Label();
             txt_UID = new TextBox();
+            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -199,11 +200,25 @@
             txt_UID.Size = new Size(285, 27);
             txt_UID.TabIndex = 16;
             // 
+            // label5
+            // 
+            label5.BackColor = Color.Red;
+            label5.Cursor = Cursors.Hand;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Location = new Point(757, -1);
+            label5.Name = "label5";
+            label5.Size = new Size(44, 33);
+            label5.TabIndex = 17;
+            label5.Text = "X";
+            label5.TextAlign = ContentAlignment.MiddleCenter;
+            label5.Click += label5_Click;
+            // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label5);
             Controls.Add(txt_UID);
             Controls.Add(label4);
             Controls.Add(btn_deletetrai);
@@ -221,7 +236,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.None;
             Name = "AdminForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AdminForm";
@@ -250,5 +265,6 @@
         private Button btn_deletetrai;
         private Label label4;
         private TextBox txt_UID;
+        private Label label5;
     }
 }

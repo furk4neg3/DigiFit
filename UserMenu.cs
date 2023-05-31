@@ -546,6 +546,9 @@ namespace DigiFit {
                     cmd.CommandText = "update [UserTable] set [CurrentKilo] = '" + txt_firstex.Text + "', [Target] = '" + txt_secondex.Text + "', [Username] = '" + txt_thirdex.Text + "', [Password] = '" + txt_lastex.Text + "' where [Username] = '"+usLo.userName+"'";
                     cmd.ExecuteNonQuery();
                     connection.Close();
+                    //Kilo ve hedef bilgisi değiştirildiğinde menüde yukarıda yazan bilgilerin de değişmesi için kullanılan kod
+                    lbl_kilo.Text = "Güncel Kilo: " + txt_firstex.Text;
+                    lbl_target.Text = "Hedef: " + txt_secondex.Text;
                 }
             }
 
