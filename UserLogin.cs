@@ -50,19 +50,28 @@ namespace DigiFit {
             connection.Open();
             //Okuma işleminin yapılabilmesi için command objesi oluşturulur
             OleDbCommand command = new OleDbCommand();
-            //Oluşturulan command objesi connection yardımıyla veritabanına bağlanır
+            //Aynı kullanıcı adını kullanan birisi varsa da sıkıntı çıkacağından bunu kontrol etmek için de bir obje oluşturulur
+            OleDbCommand cmd = new OleDbCommand();
+            //Oluşturulan cmd ve command objesi connection yardımıyla veritabanına bağlanır
             command.Connection = connection;
-            //UserTable'daki kullanıcı adı ve şifre girilen kullanıcı adı ve şifreye eşit olan tüm veriler okunur
+            cmd.Connection = connection;
+            //UserTable'daki kullanıcı adı ve şifre girilen kullanıcı adı ve şifreye eşit olan tüm veriler okunur, ardından kullanıcı adına eşit olan veriler okunur
             command.CommandText = "select * from UserTable where Username='" + txt_username.Text + "' and Password='" + txt_password.Text + "'";
+            cmd.CommandText = "select * from UserTable where Username='" + txt_username.Text + "'";
             //Verilerde bir değişiklik yapmayacağımız ve sadece okuma işlemi yapacağımız için executequery değil reader çağırıyoruz
             OleDbDataReader reader = command.ExecuteReader();
+            OleDbDataReader reader1 = cmd.ExecuteReader();
             int count = 0;
-            //Girilen kullanıcı adı ve şifreye sahip kaç kullanıcı olduğu sayılır
+            int count2 = 0;
+            //Girilen kullanıcı adı ve şifreye, sonrasında sadece girilen kullanıcı adına sahip kaç kullanıcı olduğu sayılır
             while (reader.Read()) {
                 count++;
             }
-            //Eğer sadece 1 kullanıcının kullanıcı adı ve şifre bilgileri girilenle aynıysa doğru bir giriş yapılmıştır, öğrenci menüsü açılır
-            if (count == 1) {
+            while (reader1.Read()) {
+                count2++;
+            }
+            //Eğer sadece 1 kullanıcının kullanıcı adı ve şifre bilgileri girilenle aynıysa ve aynı kullanıcı adına sahip sadece 1 kişi varsa doğru bir giriş yapılmıştır, öğrenci menüsü açılır
+            if (count == 1 && count2 == 1) {
                 //Artık veritabanıyla bağlantı yapmamızı gerektirecek bir durum olmadığı için bağlantı kapatılır
                 connection.Close();
                 //Oluşturulan public string öğrenci menüsünde kullanılmak üzere öğrencinin kullanıcı adına eşitlenir
@@ -73,9 +82,9 @@ namespace DigiFit {
                 UserMenu userMenu = new UserMenu(this);
                 userMenu.ShowDialog();
                 MessageBox.Show("Username and Password are correct");
-            //Eğer girilen kullanıcı adı ve şifreye sahip 1den fazla kişi varsa istenmeyen bir durum oluşmuştur, kullanıcıya bilgi verilir
-            } else if(count > 1) {
-                MessageBox.Show("Giriş yapılamıyor. Lütfen antrenörünüzle iletişime geçiniz.");
+            //Eğer girilen kullanıcı adı ve şifreye sahip 1den fazla kişi varsa veya aynı kullanıcı adına sahip 1'den fazla kişi varsa istenmeyen bir durum oluşmuştur, kullanıcıya bilgi verilir
+            } else if(count > 1 || count2 > 1) {
+                MessageBox.Show("Sizinle aynı kullanıcı adına sahip biri tespit edildi. Lütfen antrenörünüzle iletişime geçiniz.");
             //Girilen kullanıcı adı ve şifre değerleri tabloda hiç yoksa giriş yanlıştır. Tekrar denemesi istenir.
             } else {
                 MessageBox.Show("Kullanıcı adı veya şifre yanlış, lütfen tekrar deneyiniz.");
