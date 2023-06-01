@@ -46,19 +46,28 @@ namespace DigiFit {
             connection.Open();
             //Okuma işleminin yapılabilmesi için command objesi oluşturulur
             OleDbCommand command = new OleDbCommand();
+            OleDbCommand cmd = new OleDbCommand();
             //Oluşturulan command objesi connection yardımıyla veritabanına bağlanır
             command.Connection = connection;
+            cmd.Connection = connection;
             //TrainerTable'daki kullanıcı adı ve şifre girilen kullanıcı adı ve şifreye eşit olan tüm veriler okunur
             command.CommandText = "select * from TrainerTable where Username='" + txt_username.Text + "' and Password='" + txt_password.Text + "'";
+            cmd.CommandText = "select * from UserTable where Username='" + txt_getuser.Text + "'";
             //Verilerde bir değişiklik yapmayacağımız ve sadece okuma işlemi yapacağımız için executequery değil reader çağırıyoruz
             OleDbDataReader reader = command.ExecuteReader();
+            OleDbDataReader reader1 = cmd.ExecuteReader();
             int count = 0;
+            int count2 = 0;
             //Girilen kullanıcı adı ve şifreye sahip kaç kullanıcı olduğu sayılır
             while (reader.Read()) {
                 count++;
             }
-            //Eğer sadece 1 kullanıcının kullanıcı adı ve şifre bilgileri girilenle aynıysa doğru bir giriş yapılmıştır, antrenör menüsü açılır
-            if (count == 1) {
+            //Girilen öğrenci kullanıcı adına sahip kaç kullanıcı olduğu sayılır
+            while (reader1.Read()) {
+                count2++;
+            }
+            //Eğer sadece 1 kullanıcının kullanıcı adı ve şifre bilgileri girilenle aynıysa ve girilen öğrenci kullanıcı adına sahip sadece 1 kişi varsa doğru bir giriş yapılmıştır, antrenör menüsü açılır
+            if (count == 1 && count2 == 1) {
                 //Artık veritabanıyla bağlantı yapmamızı gerektirecek bir durum olmadığı için bağlantı kapatılır
                 connection.Close();
                 //Kullanıcı adı ve şifre bilgileri doğru olduğu için bunlar beni hatırla özelliği seçiliyse kaydedilir, bunun için kullanılan fonksiyon çağırılır
@@ -68,12 +77,15 @@ namespace DigiFit {
                 this.Hide();
                 TrainerMenu trainerMenu = new TrainerMenu(this);
                 trainerMenu.ShowDialog();
-            //Eğer girilen kullanıcı adı ve şifreye sahip 1den fazla kişi varsa istenmeyen bir durum oluşmuştur, kullanıcıya bilgi verilir
-            } else if (count > 1) {
-                MessageBox.Show("Giriş yapılamıyor, lütfen yetkili kişiye danışınız.");
+            //Eğer girilen kullanıcına sahip 1den fazla öğrenci varsa istenmeyen bir durum oluşmuştur, kullanıcıya bilgi verilir
+            } else if (count2 > 1) {
+                MessageBox.Show("Girdiğiniz öğrenci kullanıcı adına sahip 1'den fazla kişi tespit edildi. Lütfen yetkili kişiye haber verin.");
             //Girilen kullanıcı adı ve şifre değerleri tabloda hiç yoksa giriş yanlıştır. Tekrar denemesi istenir.
-            } else {
+            } else if(count == 0){
                 MessageBox.Show("Kullanıcı adı veya şifre yanlış, lütfen tekrar deneyiniz.");
+            //Girilen öğrenci kullanıcı adına sahip öğrenci yoksa tekrar giriş yapılması istenir
+            } else {
+                MessageBox.Show("Girilen öğrenci kullanıcı adına sahip kullanıcı bulunamadı, lütfen tekrar deneyiniz.");
             }
 
             //Veritabanıyla olan bağlantı kapatılır
