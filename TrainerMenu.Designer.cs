@@ -237,24 +237,22 @@
             // 
             // label3
             // 
-            label3.Font = new Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = Color.WhiteSmoke;
             label3.Location = new Point(601, 0);
             label3.Name = "label3";
             label3.Size = new Size(165, 75);
             label3.TabIndex = 2;
-            label3.Text = "Tekrar Giriniz";
             label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
-            label2.Font = new Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = Color.WhiteSmoke;
-            label2.Location = new Point(387, 0);
+            label2.Location = new Point(365, 0);
             label2.Name = "label2";
             label2.Size = new Size(180, 75);
             label2.TabIndex = 1;
-            label2.Text = "Lütfen Çıkıp";
             label2.TextAlign = ContentAlignment.MiddleCenter;
             label2.Click += label2_Click;
             // 
@@ -272,13 +270,12 @@
             // 
             // lbl_name
             // 
-            lbl_name.Font = new Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            lbl_name.Font = new Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             lbl_name.ForeColor = Color.WhiteSmoke;
             lbl_name.Location = new Point(0, 0);
             lbl_name.Name = "lbl_name";
             lbl_name.Size = new Size(381, 75);
             lbl_name.TabIndex = 0;
-            lbl_name.Text = "Hatalı Kullanıcı Adı Girdiniz";
             lbl_name.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panel4
