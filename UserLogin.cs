@@ -18,8 +18,8 @@ namespace DigiFit {
     public partial class UserLogin : Form {
         //MS Access'e bağlanmak için OleDbConnection objesi oluşturulur
         private OleDbConnection connection = new OleDbConnection();
-        //Giriş yapıldıktan sonra girişi yapan kişinin bilgilerini gösterebilmek için kullanıcı adı verisi öğrenci menüsünde kullanılmak üzere public olarak tanımlanır
-        public string userName { get; private set; }
+        //Giriş yapıldıktan sonra girişi yapan kişinin bilgilerini gösterebilmek için ID verisi öğrenci menüsünde kullanılmak üzere public olarak tanımlanır
+        public string userID { get; private set; }
         public UserLogin() {
             InitializeComponent();
             //İlgili veritabanına bağlantı sağlanır
@@ -63,8 +63,12 @@ namespace DigiFit {
             OleDbDataReader reader1 = cmd.ExecuteReader();
             int count = 0;
             int count2 = 0;
+            //kullanıcı ID'sini alabilmek için int değişken
+            int userIDc = 0;
             //Girilen kullanıcı adı ve şifreye, sonrasında sadece girilen kullanıcı adına sahip kaç kullanıcı olduğu sayılır
             while (reader.Read()) {
+                //ID verisi alınır
+                userIDc = Convert.ToInt32(reader[0]);
                 count++;
             }
             while (reader1.Read()) {
@@ -75,10 +79,11 @@ namespace DigiFit {
                 //Artık veritabanıyla bağlantı yapmamızı gerektirecek bir durum olmadığı için bağlantı kapatılır
                 connection.Close();
                 //Oluşturulan public string öğrenci menüsünde kullanılmak üzere öğrencinin kullanıcı adına eşitlenir
-                userName = txt_username.Text;
                 //Kullanıcı adı ve şifre bilgileri doğru olduğu için bunlar beni hatırla özelliği seçiliyse kaydedilir, bunun için kullanılan fonksiyon çağırılır
                 Save_Data();
                 this.Hide();
+                //ID verisi string halinde userID değişkenine gönderilir.
+                userID = userIDc.ToString();
                 UserMenu userMenu = new UserMenu(this);
                 userMenu.ShowDialog();
                 MessageBox.Show("Username and Password are correct");

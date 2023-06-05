@@ -35,7 +35,7 @@ namespace DigiFit {
             connection.Open();
             //Giriş yapan kullanıcının kilo ve hedef bilgileri yazdırılır
             OleDbDataReader reader = null;
-            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE Username='" + usLo.userName + "'", connection);
+            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE ID = " + usLo.userID + "", connection);
             reader = command.ExecuteReader();
 
             while (reader.Read()) {
@@ -78,12 +78,12 @@ namespace DigiFit {
 
             connection.Open();
             OleDbDataReader reader = null;
-            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE Username='" + usLo.userName + "'", connection);
+            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE ID=" + usLo.userID + "", connection);
             reader = command.ExecuteReader();
             //Öğrencinin bilgileri ilgili yerlere yazdırılır
             while (reader.Read()) {
                 lbl_firstex.Text = reader[60].ToString();
-                lbl_firstkilo.Text = reader[61].ToString();//9 10 12 13 15 16
+                lbl_firstkilo.Text = reader[61].ToString();
                 lbl_secondex.Text = reader[63].ToString();
                 lbl_secondkilo.Text = reader[64].ToString();
                 lbl_thirdex.Text = reader[66].ToString();
@@ -107,7 +107,7 @@ namespace DigiFit {
                     connection.Open();
                     OleDbCommand cmd = new OleDbCommand();
                     cmd.Connection = connection;
-                    cmd.CommandText = "update UserTable set Sı1Kilo = '" + txt_firstex.Text + "', Sı2Kilo = '" + txt_secondex.Text + "', Sı3Kilo = '" + txt_thirdex.Text + "', Sı4Kilo = '" + txt_lastex.Text + "' where [Username] = '"+usLo.userName+"'";
+                    cmd.CommandText = "update UserTable set Sı1Kilo = '" + txt_firstex.Text + "', Sı2Kilo = '" + txt_secondex.Text + "', Sı3Kilo = '" + txt_thirdex.Text + "', Sı4Kilo = '" + txt_lastex.Text + "' where [ID] = "+usLo.userID +"";
                     cmd.ExecuteNonQuery();
                     connection.Close();
                 }
@@ -141,12 +141,12 @@ namespace DigiFit {
 
             connection.Open();
             OleDbDataReader reader = null;
-            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE Username='" + usLo.userName + "'", connection);
+            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE ID=" + usLo.userID + "", connection);
             reader = command.ExecuteReader();
 
             while (reader.Read()) {
                 lbl_firstex.Text = reader[6].ToString();
-                lbl_firstkilo.Text = reader[7].ToString();//9 10 12 13 15 16
+                lbl_firstkilo.Text = reader[7].ToString();
                 lbl_secondex.Text = reader[9].ToString();
                 lbl_secondkilo.Text = reader[10].ToString();
                 lbl_thirdex.Text = reader[12].ToString();
@@ -169,7 +169,7 @@ namespace DigiFit {
                     connection.Open();
                     OleDbCommand cmd = new OleDbCommand();
                     cmd.Connection = connection;
-                    cmd.CommandText = "update UserTable set Ba1Kilo = '" + txt_firstex.Text + "', Ba2Kilo = '" + txt_secondex.Text + "', Ba3Kilo = '" + txt_thirdex.Text + "', Ba4Kilo = '" + txt_lastex.Text + "' where [Username] = '"+usLo.userName+"'";
+                    cmd.CommandText = "update UserTable set Ba1Kilo = '" + txt_firstex.Text + "', Ba2Kilo = '" + txt_secondex.Text + "', Ba3Kilo = '" + txt_thirdex.Text + "', Ba4Kilo = '" + txt_lastex.Text + "' where [ID] = "+usLo.userID +"";
                     cmd.ExecuteNonQuery();
                     connection.Close();
                 }
@@ -203,12 +203,12 @@ namespace DigiFit {
 
             connection.Open();
             OleDbDataReader reader = null;
-            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE Username='" + usLo.userName + "'", connection);
+            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE ID=" + usLo.userID + "", connection);
             reader = command.ExecuteReader();
 
             while (reader.Read()) {
                 lbl_firstex.Text = reader[18].ToString();
-                lbl_firstkilo.Text = reader[19].ToString();//9 10 12 13 15 16
+                lbl_firstkilo.Text = reader[19].ToString();
                 lbl_secondex.Text = reader[21].ToString();
                 lbl_secondkilo.Text = reader[22].ToString();
                 lbl_thirdex.Text = reader[24].ToString();
@@ -231,7 +231,7 @@ namespace DigiFit {
                     connection.Open();
                     OleDbCommand cmd = new OleDbCommand();
                     cmd.Connection = connection;
-                    cmd.CommandText = "update UserTable set Bi1Kilo = '" + txt_firstex.Text + "', Bi2Kilo = '" + txt_secondex.Text + "', Bi3Kilo = '" + txt_thirdex.Text + "', Bi4Kilo = '" + txt_lastex.Text + "' where [Username] = '"+usLo.userName+"'";
+                    cmd.CommandText = "update UserTable set Bi1Kilo = '" + txt_firstex.Text + "', Bi2Kilo = '" + txt_secondex.Text + "', Bi3Kilo = '" + txt_thirdex.Text + "', Bi4Kilo = '" + txt_lastex.Text + "' where [ID] = "+usLo.userID +"";
                     cmd.ExecuteNonQuery();
                     connection.Close();
                 }
@@ -265,12 +265,12 @@ namespace DigiFit {
 
             connection.Open();
             OleDbDataReader reader = null;
-            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE Username='" + usLo.userName + "'", connection);
+            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE ID=" + usLo.userID + "", connection);
             reader = command.ExecuteReader();
 
             while (reader.Read()) {
                 lbl_firstex.Text = reader[30].ToString();
-                lbl_firstkilo.Text = reader[31].ToString();//9 10 12 13 15 16
+                lbl_firstkilo.Text = reader[31].ToString();
                 lbl_secondex.Text = reader[33].ToString();
                 lbl_secondkilo.Text = reader[34].ToString();
                 lbl_thirdex.Text = reader[36].ToString();
@@ -293,7 +293,7 @@ namespace DigiFit {
                     connection.Open();
                     OleDbCommand cmd = new OleDbCommand();
                     cmd.Connection = connection;
-                    cmd.CommandText = "update UserTable set Go1Kilo = '" + txt_firstex.Text + "', Go2Kilo = '" + txt_secondex.Text + "', Go3Kilo = '" + txt_thirdex.Text + "', Go4Kilo = '" + txt_lastex.Text + "' where [Username] = '"+usLo.userName+"'";
+                    cmd.CommandText = "update UserTable set Go1Kilo = '" + txt_firstex.Text + "', Go2Kilo = '" + txt_secondex.Text + "', Go3Kilo = '" + txt_thirdex.Text + "', Go4Kilo = '" + txt_lastex.Text + "' where [ID] = "+usLo.userID +"";
                     cmd.ExecuteNonQuery();
                     connection.Close();
                 }
@@ -327,12 +327,12 @@ namespace DigiFit {
 
             connection.Open();
             OleDbDataReader reader = null;
-            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE Username='" + usLo.userName + "'", connection);
+            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE ID=" + usLo.userID + "", connection);
             reader = command.ExecuteReader();
 
             while (reader.Read()) {
                 lbl_firstex.Text = reader[42].ToString();
-                lbl_firstkilo.Text = reader[43].ToString();//9 10 12 13 15 16
+                lbl_firstkilo.Text = reader[43].ToString();
                 lbl_secondex.Text = "Öncelikle ";
                 lbl_secondkilo.Text = "antrenörünüze";
                 lbl_thirdex.Text = reader[45].ToString();
@@ -351,7 +351,7 @@ namespace DigiFit {
                     connection.Open();
                     OleDbCommand cmd = new OleDbCommand();
                     cmd.Connection = connection;
-                    cmd.CommandText = "update UserTable set Ka1Time = '" + txt_firstex.Text + "', Ka2Time = '" + txt_thirdex.Text + "' WHERE [Username]='"+usLo.userName+"'";
+                    cmd.CommandText = "update UserTable set Ka1Time = '" + txt_firstex.Text + "', Ka2Time = '" + txt_thirdex.Text + "' WHERE [ID]="+usLo.userID +"";
                     cmd.ExecuteNonQuery();
                     connection.Close();
                 }
@@ -385,12 +385,12 @@ namespace DigiFit {
 
             connection.Open();
             OleDbDataReader reader = null;
-            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE Username='" + usLo.userName + "'", connection);
+            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE ID=" + usLo.userID + "", connection);
             reader = command.ExecuteReader();
 
             while (reader.Read()) {
                 lbl_firstex.Text = reader[48].ToString();
-                lbl_firstkilo.Text = reader[49].ToString();//9 10 12 13 15 16
+                lbl_firstkilo.Text = reader[49].ToString();
                 lbl_secondex.Text = reader[51].ToString();
                 lbl_secondkilo.Text = reader[52].ToString();
                 lbl_thirdex.Text = reader[54].ToString();
@@ -413,7 +413,7 @@ namespace DigiFit {
                     connection.Open();
                     OleDbCommand cmd = new OleDbCommand();
                     cmd.Connection = connection;
-                    cmd.CommandText = "update UserTable set Om1Kilo = '" + txt_firstex.Text + "', Om2Kilo = '" + txt_secondex.Text + "', Om3Kilo = '" + txt_thirdex.Text + "', Om4Kilo = '" + txt_lastex.Text + "' where [Username] = '"+usLo.userName+"' ";
+                    cmd.CommandText = "update UserTable set Om1Kilo = '" + txt_firstex.Text + "', Om2Kilo = '" + txt_secondex.Text + "', Om3Kilo = '" + txt_thirdex.Text + "', Om4Kilo = '" + txt_lastex.Text + "' where [ID] = "+usLo.userID +" ";
                     cmd.ExecuteNonQuery();
                     connection.Close();
                 }
@@ -447,12 +447,12 @@ namespace DigiFit {
 
             connection.Open();
             OleDbDataReader reader = null;
-            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE Username='" + usLo.userName + "'", connection);
+            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE ID=" + usLo.userID + "", connection);
             reader = command.ExecuteReader();
 
             while (reader.Read()) {
                 lbl_firstex.Text = reader[72].ToString();
-                lbl_firstkilo.Text = reader[73].ToString();//9 10 12 13 15 16
+                lbl_firstkilo.Text = reader[73].ToString();
                 lbl_secondex.Text = reader[75].ToString();
                 lbl_secondkilo.Text = reader[76].ToString();
                 lbl_thirdex.Text = reader[78].ToString();
@@ -476,7 +476,7 @@ namespace DigiFit {
                     connection.Open();
                     OleDbCommand cmd = new OleDbCommand();
                     cmd.Connection = connection;
-                    cmd.CommandText = "update UserTable set Tr1Kilo = '" + txt_firstex.Text + "', Tr2Kilo = '" + txt_secondex.Text + "', Tr3Kilo = '" + txt_thirdex.Text + "', Tr4Kilo = '" + txt_lastex.Text + "' where [Username] = '" + usLo.userName + "'";
+                    cmd.CommandText = "update UserTable set Tr1Kilo = '" + txt_firstex.Text + "', Tr2Kilo = '" + txt_secondex.Text + "', Tr3Kilo = '" + txt_thirdex.Text + "', Tr4Kilo = '" + txt_lastex.Text + "' where [ID] = " + usLo.userID + "";
                     cmd.ExecuteNonQuery();
                     connection.Close();
                 }
@@ -523,7 +523,7 @@ namespace DigiFit {
             txt_lastex.Left = 300;
             connection.Open();
             OleDbDataReader reader = null;
-            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE Username='" + usLo.userName + "'", connection);
+            OleDbCommand command = new OleDbCommand("SELECT * from  UserTable WHERE ID=" + usLo.userID + "", connection);
             reader = command.ExecuteReader();
 
             while (reader.Read()) {
@@ -533,13 +533,14 @@ namespace DigiFit {
                 txt_lastex.Text = reader[3].ToString();
             }
 
+            int count1 = 0;
+
             txt_firstex.KeyDown += new KeyEventHandler(tb_KeyDown);
             txt_secondex.KeyDown += new KeyEventHandler(tb_KeyDown);
             txt_thirdex.KeyDown += new KeyEventHandler(tb_KeyDown);
             txt_lastex.KeyDown += new KeyEventHandler(tb_KeyDown);
 
             void tb_KeyDown(object sender, KeyEventArgs e) {
-                int count1 = 0;
                 if (e.KeyCode == Keys.Enter && panel3.Top == 0) {
                     connection.Open();
                     OleDbCommand cmd = new OleDbCommand();
@@ -553,11 +554,10 @@ namespace DigiFit {
                         count1++;
                     }
                     if (count1 == 0) {
-                        cmd.CommandText = "update [UserTable] set [CurrentKilo] = '" + txt_firstex.Text + "', [Target] = '" + txt_secondex.Text + "', [Username] = '" + txt_thirdex.Text + "', [Password] = '" + txt_lastex.Text + "' where [Username] = '" + usLo.userName + "'";
+                        cmd.CommandText = "update [UserTable] set [CurrentKilo] = '" + txt_firstex.Text + "', [Target] = '" + txt_secondex.Text + "', [Username] = '" + txt_thirdex.Text + "', [Password] = '" + txt_lastex.Text + "' where [ID] = " + usLo.userID + "";
                         cmd.ExecuteNonQuery();
                     } else {
                         MessageBox.Show("Geçersiz kullanıcı adı girildi. Lütfen tekrar deneyiniz.");
-                        txt_thirdex.Text = usLo.userName;
                         count1 = 0;
                     }
                     connection.Close();
