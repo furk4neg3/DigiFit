@@ -539,12 +539,27 @@ namespace DigiFit {
             txt_lastex.KeyDown += new KeyEventHandler(tb_KeyDown);
 
             void tb_KeyDown(object sender, KeyEventArgs e) {
+                int count1 = 0;
                 if (e.KeyCode == Keys.Enter && panel3.Top == 0) {
                     connection.Open();
                     OleDbCommand cmd = new OleDbCommand();
+                    //command değişkeni iki kişinin aynı kullanıcı adına sahip olamaması için kullanılır. Girilen kullanıcı adı daha önce alındıysa kullanıcıya uyarı verilir.
+                    OleDbCommand command = new OleDbCommand();
                     cmd.Connection = connection;
-                    cmd.CommandText = "update [UserTable] set [CurrentKilo] = '" + txt_firstex.Text + "', [Target] = '" + txt_secondex.Text + "', [Username] = '" + txt_thirdex.Text + "', [Password] = '" + txt_lastex.Text + "' where [Username] = '" + usLo.userName + "'";
-                    cmd.ExecuteNonQuery();
+                    command.Connection = connection;
+                    command.CommandText = "select * from UserTable where Username='" + txt_thirdex.Text + "'";
+                    OleDbDataReader reader1 = command.ExecuteReader();
+                    while (reader1.Read()) {
+                        count1++;
+                    }
+                    if (count1 == 0) {
+                        cmd.CommandText = "update [UserTable] set [CurrentKilo] = '" + txt_firstex.Text + "', [Target] = '" + txt_secondex.Text + "', [Username] = '" + txt_thirdex.Text + "', [Password] = '" + txt_lastex.Text + "' where [Username] = '" + usLo.userName + "'";
+                        cmd.ExecuteNonQuery();
+                    } else {
+                        MessageBox.Show("Geçersiz kullanıcı adı girildi. Lütfen tekrar deneyiniz.");
+                        txt_thirdex.Text = usLo.userName;
+                        count1 = 0;
+                    }
                     connection.Close();
                     //Kilo ve hedef bilgisi değiştirildiğinde menüde yukarıda yazan bilgilerin de değişmesi için kullanılan kod
                     lbl_kilo.Text = "Güncel Kilo: " + txt_firstex.Text;
